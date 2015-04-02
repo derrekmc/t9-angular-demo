@@ -9,16 +9,14 @@
   <body ng-app="MyApp">
     <div ng-controller="dialPadController" >
 
-        <div style="width:150px; display: block; float:left;">
+        <div class="leftContainer">
             <h2>t9</h2>
             <textarea class="display">{{output.sentence}} {{output.word}}</textarea>
             <button ng-repeat="dial in dialPadMap" style="display: block; width:50px; height:50px; float:left; padding:10px;" ng-click="dial.click(pad)">{{dial.number}}<br>{{dial.letters}}</button>
         </div>
 
-        <div style="display:block; margin:100px 0px 0px 30px; float:left;">
-
+        <div class="rightContainer">
             Input: <input type="text" ng-model="pad.number" ng-change="update(pad)" /><br />
-
             <h2>Word Combinations</h2>
             <ul ng-repeat="word in output.words">
                 <li>{{word}}</li>

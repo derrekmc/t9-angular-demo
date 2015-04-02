@@ -2,6 +2,66 @@ var app = angular.module("MyApp", []);
 
 app.controller("dialPadController", function($scope, $http) {
 
+    var option = 0;
+
+    $scope.changeOption = function() {
+        if(option < $scope.output.words.length-1){
+            option++;
+        }else{
+            option = 0;
+        }
+        $scope.pad.option = option;
+        $scope.update($scope.pad);
+    };
+
+    $scope.addInput = function(input) {
+        (!$scope.pad.number ? $scope.pad.number = input.toString()  : $scope.pad.number += input.toString());
+        $scope.update($scope.pad);
+    };
+
+    $scope.addSpace = function(pad ) {
+        $scope.output.sentence += " " + angular.copy($scope.output.word);
+        pad.number = '';
+        $scope.output.word = '';
+        option = 0;
+    };
+
+    $scope.removeCharacter = function(pad) {
+        if(pad.number.length < 1) {
+            $scope.output.sentence = $scope.output.sentence.substr(0, $scope.output.sentence.length-1);
+        }
+        pad.number = pad.number.substr(0, pad.number.length-1);
+        $scope.update(pad);
+    };
+
+    /**
+     * API update
+     * @param pad
+     */
+    $scope.update = function(pad) {
+        $http.get('api/wordCombinations?input=' + pad.number + '&option=' + option).
+
+            success(function(data, status, headers, config) {
+                console.log(data);
+                $scope.output.words = angular.copy(data.words);
+                $scope.output.word = angular.copy(data.word);
+             }).
+
+            error(function(data, status, headers, config) {
+                console.error(data);
+            });
+    };
+
+    $scope.reset = function() {
+        $scope.pad = angular.copy($scope.master);
+    };
+
+    $scope.reset();
+
+    /**
+     * Data Models
+     * @type {{pad1: {number: number, letters: string, click: click}, pad2: {number: number, letters: string, click: click}, pad3: {number: number, letters: string, click: click}, pad4: {number: number, letters: string, click: click}, pad5: {number: number, letters: string, click: click}, pad6: {number: number, letters: string, click: click}, pad7: {number: number, letters: string, click: click}, pad8: {number: number, letters: string, click: click}, pad9: {number: number, letters: string, click: click}, pad_Star: {number: string, letters: string, click: click}, padZero: {number: number, letters: string, click: click}, padPound: {number: string, letters: string, click: click}}}
+     */
     $scope.dialPadMap = {
         pad1: {
             number: 1,
@@ -102,75 +162,6 @@ app.controller("dialPadController", function($scope, $http) {
         word: ''
     };
 
-    var option = 0;
 
-    $scope.changeOption = function() {
 
-        if(option < $scope.output.words.length-1){
-            option++;
-        }else{
-            option = 0;
-        }
-
-        $scope.pad.option = option;
-
-        $scope.update($scope.pad);
-
-        console.log('option: ', option, 'wc: ', $scope.output.words.length);
-    };
-
-    $scope.addInput = function(input) {
-        (!$scope.pad.number ? $scope.pad.number = input.toString()  : $scope.pad.number += input.toString());
-        $scope.update($scope.pad);
-    };
-
-    $scope.addSpace = function(pad ) {
-        $scope.output.sentence += " " + angular.copy($scope.output.word);
-        pad.number = '';
-        $scope.output.word = '';
-        option = 0;
-    };
-
-    $scope.removeCharacter = function(pad ) {
-        console.log('del');
-
-        pad.number = pad.number.substr(0, pad.number.length-1);
-        $scope.update(pad);
-    };
-
-    $scope.update = function(pad) {
-
-        var isSpace = (pad.number.indexOf(' ') != -1) ? true : false;
-
-        console.log('option:', option);
-
-        if(isSpace) {
-
-            $scope.output.sentence += " " + angular.copy($scope.output.word);
-            pad.number = pad.number.substr(pad.number.indexOf(' '));
-
-        }else{
-
-            $http.get('api/wordCombinations?input=' + pad.number + '&option=' + option).
-
-                success(function(data, status, headers, config) {
-                    console.log(data);
-                    $scope.output.words = angular.copy(data.words);
-                    $scope.output.word = angular.copy(data.word);
-                 }).
-
-                error(function(data, status, headers, config) {
-                    // log error
-                    //$scope.master = angular.copy(data);
-                });
-
-        }
-
-    };
-
-    $scope.reset = function() {
-        $scope.pad = angular.copy($scope.master);
-    };
-
-    $scope.reset();
 });

@@ -8,6 +8,21 @@ a {
 }
 
 .display{
-    width: inherit;
+    width:inherit;
+    padding:10px;
+    width: 130px;
     height: 100px;
+    border: none;
+}
+
+.rightContainer{
+    display:block;
+    margin:100px 0px 0px 30px;
+    float:left;
+}
+
+.leftContainer{
+    width:150px;
+    display: block;
+    float:left;
 }
