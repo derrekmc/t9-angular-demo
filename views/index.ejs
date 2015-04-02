@@ -11,8 +11,7 @@
     <div ng-controller="dialPadController" >
 
         <div class="leftContainer">
-            <center><h2><%= title %></h2></center>
-            <textarea class="display" disabled>{{output.sentence}} {{output.word}}</textarea>
+            <div class="display" disabled>{{output.sentence}} {{output.word}}<span id="typed-cursor" class="blinking">|</span></div>
             <button ng-repeat="dial in dialPadMap" class="dialPadNumber" ng-click="dial.click(pad)"><span style="font-size: 26px; color: #363636;">{{dial.number}}</span><br><span style="color: #444444;">{{dial.letters}}</span></button>
         </div>
 
