@@ -1,5 +1,5 @@
 body {
-    padding: 20px;
+    padding: 5px;
     font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
     background: url("../images/background.jpg") no-repeat #222222;
     background-size: 100%;
@@ -12,8 +12,7 @@ a{
 
 .display{
     padding:20px;
-    width: 320px;
-    height: 140px;
+    height: 100px;
     border: none;
     font-size: 24px;
     margin-bottom:20px;
@@ -24,20 +23,20 @@ a{
 
 .rightContainer{
     display:block;
-    margin:80px 30px 20px 30px;
+    margin:80px 10px 20px 10px;
     float:left;
 }
 
 .leftContainer{
-    width:360px;
+    width:300px;
     display: block;
     float:left;
 }
 
 .dialPadNumber{
     display: block;
-    width:120px;
-    height:100px;
+    width:100px;
+    height:80px;
     float:left;
     padding:10px;
     font-size: 18px;
