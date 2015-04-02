@@ -1,28 +1,43 @@
 body {
-  padding: 20px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 20px;
+    font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background: url("../images/background.jpg") no-repeat #222222;
+    background-size: 100%;
+    color: #ffffff;
 }
 
-a {
+a{
   color: #00B7FF;
 }
 
 .display{
-    width:inherit;
     padding:10px;
-    width: 130px;
-    height: 100px;
+    width: 325px;
+    height: 200px;
     border: none;
+    font-size: 24px;
+
+    background-blend-mode: multiply;
 }
 
 .rightContainer{
     display:block;
-    margin:100px 0px 0px 30px;
+    margin:80px 30px 0px 30px;
     float:left;
 }
 
 .leftContainer{
-    width:150px;
+    width:360px;
     display: block;
     float:left;
+}
+
+.dialPadNumber{
+    display: block;
+    width:115px;
+    height:100px;
+    float:left;
+    padding:10px;
+    font-size: 18px;
+
 }

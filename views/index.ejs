@@ -10,13 +10,13 @@
     <div ng-controller="dialPadController" >
 
         <div class="leftContainer">
-            <h2>t9</h2>
+            <center><h2><%= title %></h2></center>
             <textarea class="display">{{output.sentence}} {{output.word}}</textarea>
-            <button ng-repeat="dial in dialPadMap" style="display: block; width:50px; height:50px; float:left; padding:10px;" ng-click="dial.click(pad)">{{dial.number}}<br>{{dial.letters}}</button>
+            <button ng-repeat="dial in dialPadMap" class="dialPadNumber" ng-click="dial.click(pad)"><span style="font-size: 26px;">{{dial.number}}</span><br>{{dial.letters}}</button>
         </div>
 
         <div class="rightContainer">
-            Input: <input type="text" ng-model="pad.number" ng-change="update(pad)" /><br />
+            Input: <input type="text" ng-model="pad.number" ng-change="update(pad)" style="font-size: 16px; padding: 5px;" /><br />
             <h2>Word Combinations</h2>
             <ul ng-repeat="word in output.words">
                 <li>{{word}}</li>
