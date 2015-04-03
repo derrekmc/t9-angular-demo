@@ -30,6 +30,8 @@ app.controller("dialPadController", function($scope, $http) {
         if(pad.number.length < 1) {
             $scope.output.sentence = $scope.output.sentence.substr(0, $scope.output.sentence.length-1);
         }
+        $scope.output.word = $scope.output.word.substr(0, $scope.output.word.length-1);
+           
         pad.number = pad.number.substr(0, pad.number.length-1);
         $scope.update(pad);
     };
@@ -42,10 +44,16 @@ app.controller("dialPadController", function($scope, $http) {
         $http.get('api/wordCombinations?input=' + pad.number + '&option=' + option).
 
             success(function(data, status, headers, config) {
-                console.log(data);
-                $scope.output.words = angular.copy(data.words);
-                $scope.output.word = angular.copy(data.word);
-             }).
+                if(data.hasOwnProperty("error")) {
+                    $scope.output.error = 'Dictionary word not found for input.'; 
+                    console.error($scope.output.error);
+                }else{
+                    console.log(data);
+                    $scope.output.error = ''
+                    $scope.output.word = angular.copy(data.word);
+                    $scope.output.words = angular.copy(data.words);
+                }
+            }).
 
             error(function(data, status, headers, config) {
                 console.error(data);

@@ -8,9 +8,12 @@
         <script src="javascripts/app.js"></script>
     </head>
     <body ng-app="MyApp">
-        <div ng-controller="dialPadController" >
+        <div ng-controller="dialPadController" class="container">
             <div class="leftContainer">
                 <div class="display" disabled>{{output.sentence}} {{output.word}}<span id="typed-cursor" class="blinking">|</span></div>
+                <div class="outputError">
+                    {{output.error}}
+                </div>
                 <button ng-repeat="dial in dialPadMap" class="dialPadNumber" ng-click="dial.click(pad)">
                     <span style="font-size: 26px; color: #363636;">{{dial.number}}</span><br><span style="color: #444444;">{{dial.letters}}</span>
                 </button>
